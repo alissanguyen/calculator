@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+}
+
+button {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+
+#zero-button {
+  width: 638px;
+}
+
+#point {
+  width: 317px;
+}
+
+#equal {
+  width: 317px;
+}
+
+input {
+  padding: 20px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-size: 25px;
+}

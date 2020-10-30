@@ -2,8 +2,9 @@ import "./App.css";
 import React from "react";
 
 function App() {
-  const [currentNumber, setCurrentNumber] = React.useState();
-  const [state, setState] = React.useState("");
+  const [evaluationString, setEvaluationString] = React.useState("");
+
+  console.log("EVALUATIONS TRING STATE", evaluationString);
 
   const zero = 0;
   const one = 1;
@@ -16,42 +17,45 @@ function App() {
   const eight = 8;
   const nine = 9;
 
-  function percentage(number) {
-    setCurrentNumber(number / 100);
-  }
+  const addSymbolToEvaluationString = (symbol) => {
+    setEvaluationString((prev) => {
+      return prev.replace(/^0+/, "") + symbol.toString();
+    });
+  };
 
-  const [result, setResult] = React.useState(null);
+  // The last character in the evaluation string
+  const lastInput = evaluationString.charAt(evaluationString.length - 1);
 
-  function handleState(number) {
-    if (state === "isDividing") {
-      setResult(currentNumber / number);
-      setCurrentNumber(number);
-    } else if (state === "isMultiplying") {
-      setResult(currentNumber * number);
-      setCurrentNumber(number);
-    } else if (state === "isMinusing") {
-      setResult(currentNumber - number);
-      setCurrentNumber(number);
-    } else if (state === "isAdding") {
-      setResult(currentNumber + number);
-      setCurrentNumber(number);
-    } else {
-      setCurrentNumber(number);
+  const setOfOperandCharacters = new Set(["/", "+", "-", "*", "%", "="]);
+
+  const attemptToEvaluateResult = () => {
+    try {
+      if (setOfOperandCharacters.has(lastInput)) {
+        return eval(evaluationString.slice(0, evaluationString.length - 1));
+      }
+      return eval(evaluationString);
+    } catch (e) {
+      console.error(e);
+      return NaN;
     }
-  }
+  };
+
+  const evaluatedResult = attemptToEvaluateResult();
+
+  var stringToDisplay = setOfOperandCharacters.has(lastInput)
+    ? evaluatedResult
+    : lastInput;
 
   return (
     <React.Fragment>
       <div className="App"></div>
-      <form>
-        <input type="textarea" value={currentNumber}></input>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <input type="textarea" readOnly value={stringToDisplay}></input>
         <div className="row" id="zero-row">
           <button
             id="clear-button"
             onClick={(e) => {
-              e.preventDefault();
-              setCurrentNumber(0);
-              setState(null);
+              setEvaluationString("0");
             }}
           >
             C
@@ -59,8 +63,8 @@ function App() {
           <button
             id="toggle-sign"
             onClick={(e) => {
-              e.preventDefault();
-              setCurrentNumber(-currentNumber);
+              //TODO: FIX THIS
+              addSymbolToEvaluationString(` ${-lastInput}`);
             }}
           >
             T
@@ -68,8 +72,9 @@ function App() {
           <button
             id="percentage"
             onClick={(e) => {
-              e.preventDefault();
-              percentage(currentNumber);
+              addSymbolToEvaluationString("/100");
+              // TODO: FIX THIS
+              eval(evaluationString);
             }}
           >
             %
@@ -77,8 +82,7 @@ function App() {
           <button
             id="division"
             onClick={(e) => {
-              e.preventDefault();
-              setState("isDividing");
+              addSymbolToEvaluationString("/");
             }}
           >
             /
@@ -87,105 +91,112 @@ function App() {
         <div className="row" id="first-row">
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleState(seven);
+              addSymbolToEvaluationString(seven);
             }}
           >
             {seven}
           </button>
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleState(eight);
+              addSymbolToEvaluationString(eight);
             }}
           >
             {eight}
           </button>
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleState(nine);
+              addSymbolToEvaluationString(nine);
             }}
           >
             {nine}
           </button>
-          <button id="multiplication" onClick={(e) => {
-              e.preventDefault();
-              setState("isMultiplying");
-            }}>x</button>
+          <button
+            id="multiplication"
+            onClick={(e) => {
+              addSymbolToEvaluationString("*");
+            }}
+          >
+            x
+          </button>
         </div>
         <div className="row" id="second-row">
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleState(four);
+              addSymbolToEvaluationString(four);
             }}
           >
             {four}
           </button>
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleState(five);
+              addSymbolToEvaluationString(five);
             }}
           >
             {five}
           </button>
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleState(six);
+              addSymbolToEvaluationString(six);
             }}
           >
             {six}
           </button>
-          <button id="minus" onClick={(e) => {
-              e.preventDefault();
-              setState("isMinusing");
-            }}>-</button>
+          <button
+            id="minus"
+            onClick={(e) => {
+              addSymbolToEvaluationString("-");
+            }}
+          >
+            -
+          </button>
         </div>
         <div className="row" id="third-row">
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleState(three);
+              addSymbolToEvaluationString(one);
             }}
           >
-            {three}
+            {one}
           </button>
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleState(two);
+              addSymbolToEvaluationString(two);
             }}
           >
             {two}
           </button>
           <button
             onClick={(e) => {
-              e.preventDefault();
-              handleState(one);
+              addSymbolToEvaluationString(three);
             }}
           >
-            {one}
+            {three}
           </button>
-          <button id="addition" onClick={(e) => {
-              e.preventDefault();
-              setState("isAdding");
-            }}>+</button>
+          <button
+            id="addition"
+            onClick={(e) => {
+              addSymbolToEvaluationString("+");
+            }}
+          >
+            +
+          </button>
         </div>
         <div className="row" id="fourth-row">
           <button
             id="zero-button"
             onClick={(e) => {
-              e.preventDefault();
-              setCurrentNumber(zero);
+              addSymbolToEvaluationString(zero);
             }}
           >
             {zero}
           </button>
           <button id="point">.</button>
-          <button id="equal" onClick={(e) => {e.preventDefault(); setCurrentNumber(result); setResult(null)}}>
+          <button
+            id="equal"
+            onClick={(e) => {
+              addSymbolToEvaluationString("=");
+            }}
+          >
             =
           </button>
         </div>
