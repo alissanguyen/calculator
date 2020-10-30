@@ -104,18 +104,21 @@ function App() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setCurrentNumber(nine);
+              handleState(nine);
             }}
           >
             {nine}
           </button>
-          <button id="multiplication">x</button>
+          <button id="multiplication" onClick={(e) => {
+              e.preventDefault();
+              setState("isMultiplying");
+            }}>x</button>
         </div>
         <div className="row" id="second-row">
           <button
             onClick={(e) => {
               e.preventDefault();
-              setCurrentNumber(four);
+              handleState(four);
             }}
           >
             {four}
@@ -123,7 +126,7 @@ function App() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setCurrentNumber(five);
+              handleState(five);
             }}
           >
             {five}
@@ -131,18 +134,21 @@ function App() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setCurrentNumber(six);
+              handleState(six);
             }}
           >
             {six}
           </button>
-          <button id="minus">-</button>
+          <button id="minus" onClick={(e) => {
+              e.preventDefault();
+              setState("isMinusing");
+            }}>-</button>
         </div>
         <div className="row" id="third-row">
           <button
             onClick={(e) => {
               e.preventDefault();
-              setCurrentNumber(three);
+              handleState(three);
             }}
           >
             {three}
@@ -150,7 +156,7 @@ function App() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setCurrentNumber(two);
+              handleState(two);
             }}
           >
             {two}
@@ -158,12 +164,15 @@ function App() {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setCurrentNumber(one);
+              handleState(one);
             }}
           >
             {one}
           </button>
-          <button id="addition">+</button>
+          <button id="addition" onClick={(e) => {
+              e.preventDefault();
+              setState("isAdding");
+            }}>+</button>
         </div>
         <div className="row" id="fourth-row">
           <button
@@ -176,7 +185,7 @@ function App() {
             {zero}
           </button>
           <button id="point">.</button>
-          <button id="equal" onClick={(e) => {e.preventDefault(); setCurrentNumber(result)}}>
+          <button id="equal" onClick={(e) => {e.preventDefault(); setCurrentNumber(result); setResult(null)}}>
             =
           </button>
         </div>
