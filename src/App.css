@@ -1,11 +1,8 @@
 .App {
   text-align: center;
+  width: 80%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -40,31 +37,44 @@
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 5px;
+  grid-gap: 0px;
 }
 
 button {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 20px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  font-size: 100px;
+  height: 100%;
+  background-color: #736e71;
+  color: white;
+  border: 1px solid black;
 }
 
 #zero-button {
-  width: 638px;
+  width: 633px;
+}
+
+.special-operand {
+  background-color: #443e42;
+}
+
+.operand {
+  background-color: orange;
 }
 
 #point {
-  width: 317px;
+  width: 316px;
 }
 
 #equal {
-  width: 317px;
+  width: 316px;
 }
 
 input {
   padding: 20px;
+  height: 350px;
   width: 100%;
-  background-color: black;
+  background-color: rgb(14, 14, 14);
   color: white;
-  font-size: 25px;
+  font-size: 200px;
 }

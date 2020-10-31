@@ -53,7 +53,7 @@ function App() {
         <input type="textarea" readOnly value={stringToDisplay}></input>
         <div className="row" id="zero-row">
           <button
-            id="clear-button"
+            className="special-operand"
             onClick={(e) => {
               setEvaluationString("0");
             }}
@@ -61,16 +61,16 @@ function App() {
             C
           </button>
           <button
-            id="toggle-sign"
+            className="special-operand"
             onClick={(e) => {
               //TODO: FIX THIS
               addSymbolToEvaluationString(` ${-lastInput}`);
             }}
           >
-            T
+            +/-
           </button>
           <button
-            id="percentage"
+            className="special-operand"
             onClick={(e) => {
               addSymbolToEvaluationString("/100");
               // TODO: FIX THIS
@@ -80,7 +80,7 @@ function App() {
             %
           </button>
           <button
-            id="division"
+            className="operand"
             onClick={(e) => {
               addSymbolToEvaluationString("/");
             }}
@@ -111,7 +111,7 @@ function App() {
             {nine}
           </button>
           <button
-            id="multiplication"
+            className="operand"
             onClick={(e) => {
               addSymbolToEvaluationString("*");
             }}
@@ -142,7 +142,7 @@ function App() {
             {six}
           </button>
           <button
-            id="minus"
+            className="operand"
             onClick={(e) => {
               addSymbolToEvaluationString("-");
             }}
@@ -173,7 +173,7 @@ function App() {
             {three}
           </button>
           <button
-            id="addition"
+            className="operand"
             onClick={(e) => {
               addSymbolToEvaluationString("+");
             }}
@@ -192,7 +192,8 @@ function App() {
           </button>
           <button id="point">.</button>
           <button
-            id="equal"
+          id="equal"
+            className="operand"
             onClick={(e) => {
               addSymbolToEvaluationString("=");
             }}
